@@ -17,7 +17,9 @@ public class Bodega {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    // Hace falta la llave foránea del usuario-encargado
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_encargado")
+    private Usuario encargado;
 
     @Column(nullable = false)
     private String nombre;
