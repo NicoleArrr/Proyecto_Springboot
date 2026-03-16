@@ -18,12 +18,13 @@ public class Detalle_Movimiento {
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Movimiento")
+    @JoinColumn(name = "id_movimiento", nullable = false)
     private Movimiento movimiento;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
-
+    @Column(nullable = false)
     private Integer cantidad;
 }

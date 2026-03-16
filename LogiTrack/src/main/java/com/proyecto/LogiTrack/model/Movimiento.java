@@ -18,23 +18,27 @@ public class Movimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-
+    @Column(nullable = false)
     private LocalDateTime fecha;
 
     @Enumerated(EnumType.STRING)
-
+    @Column(nullable = false)
     private Tipo tipo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Usuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario encargado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Borigen")
+    @JoinColumn(name = "id_Borigen")
     private Bodega origen;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Bdestino")
+    @JoinColumn(name = "id_Bdestino")
     private Bodega destino;
 
+    @OneToMany(mappedBy = "Movimiento",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<DetalleMovimiento> detalles;
 }

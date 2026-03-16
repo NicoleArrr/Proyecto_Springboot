@@ -19,21 +19,23 @@ public class Auditoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private Tipo tipo;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Tipo tipoOperacion;
 
-
+    @Column(nullable = false)
     private LocalDateTime fecha;
 
-
+    @Column(nullable = false)
     private String entidadAfectada;
 
     @Column(columnDefinition = "TEXT")
     private String valoresAnteriores;
 
-
+    @Column(columnDefinition = "TEXT")
     private String valoresNuevos;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Usuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 }

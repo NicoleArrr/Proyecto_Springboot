@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Producto")
+@Table(name = "BodegaProducto")
 @Getter
 @Setter
 @AllArgsConstructor @NoArgsConstructor
@@ -19,11 +19,11 @@ public class BodegaProducto {
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Bodega", nullable = false)
+    @JoinColumn(name = "id_bodega", nullable = false)
     private Bodega bodega;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Id_Producto", nullable = false)
+    @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
     @Column(nullable = false)
