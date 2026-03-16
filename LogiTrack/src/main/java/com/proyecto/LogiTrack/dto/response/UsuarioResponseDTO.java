@@ -1,4 +1,11 @@
 package com.proyecto.LogiTrack.dto.response;
 
-public record UsuarioResponseDTO() {
+import com.proyecto.LogiTrack.model.Rol;
+
+public record UsuarioResponseDTO(
+        Long id,
+        String nombre,
+        String email,
+        Rol rol
+) {
 }

@@ -6,17 +6,17 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record MovimientoRequestDTO(
-        @NotNull(message = "El tipo de movimiento es obligatorio")
+        @NotNull(message = "El campo descriptivo del tipo de movimiento a practicar es requerido")
         Tipo tipo,
 
-        @NotNull(message = "El usuario es obligatorio")
-        Long idUsuario,
+        @NotNull(message = "El id del usuario es requerido")
+        Long id_usuario,
 
-        Long idBodegaOrigen,
+        Long id_Borigen,
 
-        Long idBodegaDestino,
+        Long id_Bdestino,
 
-        @NotNull(message = "Los detalles son obligatorios")
-        List<Detalle_MovimientoRequestDTO> detalles
+        @NotNull(message = "Los detalles del movimiento son requeridos")
+        List<Detalle_MovimientoRequestDTO> Detalles
 ) {
 }
