@@ -18,21 +18,23 @@ public class Movimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+
     private LocalDateTime fecha;
 
-
+    @Enumerated(EnumType.STRING)
 
     private Tipo tipo;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Usuario")
     private Usuario encargado;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Borigen")
     private Bodega origen;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Bdestino")
     private Bodega destino;
 
-
-    
 }

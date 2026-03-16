@@ -16,4 +16,14 @@ public class Detalle_Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Movimiento")
+    private Movimiento movimiento;
+
+
+    private Producto producto;
+
+
+    private Integer cantidad;
 }

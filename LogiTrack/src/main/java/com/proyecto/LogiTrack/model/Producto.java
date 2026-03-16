@@ -30,3 +30,4 @@ public class Producto {
     @Column(nullable = false)
     private Integer stock;
 }
+
