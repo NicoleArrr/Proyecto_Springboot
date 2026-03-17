@@ -1,0 +1,4 @@
+package com.proyecto.LogiTrack.controller;
+
+public class GestionMovimiento {
+}
