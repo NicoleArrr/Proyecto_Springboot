@@ -7,5 +7,6 @@ public record ProductoResponseDTO(
         String nombre,
         String categoria,
         BigDecimal precio
+        // Integer stock
 ) {
 }
