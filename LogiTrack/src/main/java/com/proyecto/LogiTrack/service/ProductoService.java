@@ -12,5 +12,5 @@ public interface ProductoService {
     List<ProductoResponseDTO> listarProductos();
     ProductoResponseDTO buscarPorId(Long id);
     // Consulta de Productos con stock menor a diez.
-    List<ProductoResponseDTO> ProductosStockBajo();
+    List<ProductoResponseDTO> productosStockBajo(Integer stock);
 }

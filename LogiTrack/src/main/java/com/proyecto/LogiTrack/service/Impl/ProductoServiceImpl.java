@@ -61,7 +61,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public List<ProductoResponseDTO> ProductosStockBajo() {
+    public List<ProductoResponseDTO> productosStockBajo() {
         List<Producto> p= productoRepository.findByStockLessThan(10);
         return p.stream().map(productoMapper::entidadADTO).toList();
     }

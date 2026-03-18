@@ -6,7 +6,7 @@ public record ProductoResponseDTO(
         Long id,
         String nombre,
         String categoria,
-        BigDecimal precio
-        // Integer stock
+        BigDecimal precio,
+        Integer stockReal
 ) {
 }
