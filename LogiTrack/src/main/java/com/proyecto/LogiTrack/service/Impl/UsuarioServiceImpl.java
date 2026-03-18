@@ -20,9 +20,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioResponseDTO guardarUsuario(UsuarioRequestDTO dto) {
-        Usuario u = UsuarioMapper.DTOAEntidad(dto);
+        Usuario u = usuarioMapper.DTOAEntidad(dto);
         Usuario guardado = usuarioRepository.save(u);
-        return usuarioMapper.entidadADTO(guardado);;
+        return usuarioMapper.entidadADTO(guardado);
     }
 
     @Override

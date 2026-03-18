@@ -7,11 +7,16 @@ import com.proyecto.LogiTrack.model.Producto;
 import com.proyecto.LogiTrack.model.Usuario;
 import com.proyecto.LogiTrack.repository.BodegaProductoRepository;
 import com.proyecto.LogiTrack.repository.ProductoRepository;
+import com.proyecto.LogiTrack.repository.UsuarioRepository;
 import com.proyecto.LogiTrack.service.ProductoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class ProductoServiceImpl extends ProductoService {
+@Service
+@RequiredArgsConstructor
+public class ProductoServiceImpl implements ProductoService {
 
     private final ProductoRepository productoRepository;
     private final ProductoMapper productoMapper;
@@ -19,7 +24,7 @@ public class ProductoServiceImpl extends ProductoService {
 
     @Override
     public ProductoResponseDTO guardarProducto(ProductoRequestDTO dto) {
-        Producto p = ProductoMapper.DTOAEntidad(dto);
+        Producto p = productoMapper.DTOAEntidad(dto);
         Producto guardado = productoRepository.save(p);
         return productoMapper.entidadADTO(guardado, calcularStock(guardado.getId()));;
     }
@@ -42,22 +47,22 @@ public class ProductoServiceImpl extends ProductoService {
 
     @Override
     public ProductoResponseDTO buscarPorId(Long id) {
-        Usuario u = usuarioRepository.findById(id)
+        Producto p = productoRepository.findById(id)
                 .orElseThrow(() -> new BusinessRuleException("El Producto " + id + " no ha sido identificado"));
-        return usuarioMapper.entidadADTO(u);
+        return productoMapper.entidadADTO(p);
     }
 
     @Override
     public List<ProductoResponseDTO> listarProductos() {
-        return ProductoRepository.findAll()
+        return productoRepository.findAll()
                 .stream()
-                .map(productoMapper.entidadADTO)
+                .map(p -> productoMapper.entidadADTO(p,))
                 .toList();
     }
 
     @Override
-    public List<ProductoResponseDTO> ProductosStockBajo(Integer stock) {
-        List<Producto> p= ProductoRepository.findByStockLessThan(10);
-        return p.stream().map(ProductoMapper::entidadADTO).toList();
+    public List<ProductoResponseDTO> ProductosStockBajo() {
+        List<Producto> p= productoRepository.findByStockLessThan(10);
+        return p.stream().map(productoMapper::entidadADTO).toList();
     }
 }

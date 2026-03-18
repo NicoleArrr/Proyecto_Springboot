@@ -6,10 +6,11 @@ import com.proyecto.LogiTrack.dto.response.ProductoResponseDTO;
 import java.util.List;
 
 public interface ProductoService {
-    ProductoResponseDTO guardarUsuario(ProductoRequestDTO dto);
-    ProductoResponseDTO actualizarUsuario(ProductoRequestDTO dto, Long id);
-    void eliminarUsuario(Long id);
+    ProductoResponseDTO guardarProducto(ProductoRequestDTO dto);
+    ProductoResponseDTO actualizarProducto(ProductoRequestDTO dto, Long id);
+    void eliminarProducto(Long id);
     List<ProductoResponseDTO> listarProductos();
     ProductoResponseDTO buscarPorId(Long id);
-    List<ProductoResponseDTO> consultaStockBajo();
+    // Consulta de Productos con stock menor a diez.
+    List<ProductoResponseDTO> ProductosStockBajo();
 }

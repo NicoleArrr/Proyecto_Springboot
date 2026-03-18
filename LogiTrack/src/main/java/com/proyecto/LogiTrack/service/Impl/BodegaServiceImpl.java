@@ -33,7 +33,7 @@ public class BodegaServiceImpl implements BodegaService {
     @Override
     public BodegaResponseDTO actualizarBodega(BodegaRequestDTO dto, Long id) {
         Bodega b = bodegaRepository.findById(id)
-                .orElseThrow(() -> new BusinessRuleException("La Bodega " + id + " no ha sido identificada"),
+                .orElseThrow(() -> new BusinessRuleException("La Bodega " + id + " no ha sido identificada"));
         Usuario encargado = usuarioRepository.findById(dto.id_encargado())
                 .orElseThrow(() -> new BusinessRuleException("El usuario a cargo " + dto.id_encargado() + " de la bodega no ha sido identificado"));
         bodegaMapper.actualizarEntidadDesdeDTO(b, dto, encargado);
@@ -59,7 +59,7 @@ public class BodegaServiceImpl implements BodegaService {
     @Override
     public BodegaResponseDTO buscarPorId(Long id) {
         Bodega b = bodegaRepository.findById(id)
-                .orElseThrow(() -> new BusinessRuleException("La Bodega " + id + + " no ha sido identificado"));
+                .orElseThrow(() -> new BusinessRuleException("La Bodega " + id + " no ha sido identificado"));
         return bodegaMapper.entidadADTO(b);
     }
 

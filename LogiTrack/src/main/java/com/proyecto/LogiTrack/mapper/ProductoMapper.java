@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductoMapper {
-    public static Producto DTOAEntidad(ProductoRequestDTO dto) {
+    public Producto DTOAEntidad(ProductoRequestDTO dto) {
         Producto p = new Producto();
         p.setNombre(dto.nombre());
         p.setCategoria(dto.categoria());
