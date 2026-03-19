@@ -4,10 +4,8 @@ import com.proyecto.LogiTrack.dto.request.ProductoRequestDTO;
 import com.proyecto.LogiTrack.dto.response.ProductoResponseDTO;
 import com.proyecto.LogiTrack.mapper.ProductoMapper;
 import com.proyecto.LogiTrack.model.Producto;
-import com.proyecto.LogiTrack.model.Usuario;
 import com.proyecto.LogiTrack.repository.BodegaProductoRepository;
 import com.proyecto.LogiTrack.repository.ProductoRepository;
-import com.proyecto.LogiTrack.repository.UsuarioRepository;
 import com.proyecto.LogiTrack.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,11 +20,16 @@ public class ProductoServiceImpl implements ProductoService {
     private final ProductoMapper productoMapper;
     private final BodegaProductoRepository bodegaProductoRepository;
 
+    private Integer calcularStock(Long id_producto) {
+        Integer stock = bodegaProductoRepository.sumStockByProductoId(id_producto);
+        return stock != null ? stock : 0;
+    }
+
     @Override
     public ProductoResponseDTO guardarProducto(ProductoRequestDTO dto) {
         Producto p = productoMapper.DTOAEntidad(dto);
         Producto guardado = productoRepository.save(p);
-        return productoMapper.entidadADTO(guardado, calcularStock(guardado.getId()));;
+        return productoMapper.entidadADTO(guardado, calcularStock(guardado.getId()));
     }
 
     @Override
@@ -34,8 +37,8 @@ public class ProductoServiceImpl implements ProductoService {
         Producto p = productoRepository.findById(id)
                 .orElseThrow(() -> new BusinessRuleException("El Producto " + id + " no ha sido identificado"));
         productoMapper.actualizarEntidadDesdeDTO(p, dto);
-        Producto actualizado = productoRepository.save(p);
-        return productoMapper.entidadADTO(actualizado, calcularStock(actualizado.getId()));
+        Producto guardado = productoRepository.save(p);
+        return productoMapper.entidadADTO(guardado, calcularStock(guardado.getId()));
     }
 
     @Override
@@ -46,23 +49,25 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public ProductoResponseDTO buscarPorId(Long id) {
-        Producto p = productoRepository.findById(id)
-                .orElseThrow(() -> new BusinessRuleException("El Producto " + id + " no ha sido identificado"));
-        return productoMapper.entidadADTO(p);
-    }
-
-    @Override
     public List<ProductoResponseDTO> listarProductos() {
         return productoRepository.findAll()
                 .stream()
-                .map(p -> productoMapper.entidadADTO(p,))
+                .map(p -> productoMapper.entidadADTO(p, calcularStock(p.getId())))
                 .toList();
     }
 
     @Override
+    public ProductoResponseDTO buscarPorId(Long id) {
+        Producto p = productoRepository.findById(id)
+                .orElseThrow(() -> new BusinessRuleException("El Producto " + id + " no ha sido identificado"));
+        return productoMapper.entidadADTO(p, calcularStock(p.getId()));
+    }
+
+    @Override
     public List<ProductoResponseDTO> productosStockBajo() {
-        List<Producto> p= productoRepository.findByStockLessThan(10);
-        return p.stream().map(productoMapper::entidadADTO).toList();
+        return bodegaProductoRepository.findProductosConStockBajoQue(10)
+                .stream()
+                .map(p -> productoMapper.entidadADTO(p, calcularStock(p.getId())))
+                .toList();
     }
 }

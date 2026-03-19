@@ -17,7 +17,7 @@ import java.util.List;
 public class Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private LocalDateTime fecha;
@@ -38,7 +38,7 @@ public class Movimiento {
     @JoinColumn(name = "id_Bdestino")
     private Bodega destino;
 
-    @OneToMany(mappedBy = "Movimiento",
+    @OneToMany(mappedBy = "movimiento",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Detalle_Movimiento> detalles;

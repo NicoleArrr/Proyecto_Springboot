@@ -62,5 +62,4 @@ public class BodegaServiceImpl implements BodegaService {
                 .orElseThrow(() -> new BusinessRuleException("La Bodega " + id + " no ha sido identificado"));
         return bodegaMapper.entidadADTO(b);
     }
-
 }
