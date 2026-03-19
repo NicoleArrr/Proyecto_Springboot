@@ -27,7 +27,7 @@ public class GestionBodega {
 
     @GetMapping
     public ResponseEntity<List<BodegaResponseDTO>> listarBodegas() {
-        return ResponseEntity.ok(bodegaServiceImpl.listarTodos());
+        return ResponseEntity.ok(bodegaServiceImpl.listarBodegas());
     }
 
     @GetMapping("/{id}")

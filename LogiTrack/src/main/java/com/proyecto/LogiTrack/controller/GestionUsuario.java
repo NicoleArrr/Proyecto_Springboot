@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/api/Users")
 @RequiredArgsConstructor
 public class GestionUsuario {
-    public class UsuarioController {
 
         private final UsuarioServiceImpl usuarioServiceImpl;
 
@@ -27,8 +26,8 @@ public class GestionUsuario {
         }
 
         @GetMapping
-        public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
-            return ResponseEntity.ok(usuarioServiceImpl.listarTodos());
+        public ResponseEntity<List<UsuarioResponseDTO>> mostrar() {
+            return ResponseEntity.ok(usuarioServiceImpl.listarUsuarios());
         }
 
         @GetMapping("/{id}")
@@ -46,5 +45,4 @@ public class GestionUsuario {
             usuarioServiceImpl.eliminarUsuario(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-    }
 }
