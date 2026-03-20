@@ -24,7 +24,7 @@ public class Detalle_MovimientoMapper {
     public Detalle_MovimientoResponseDTO entidadADTO(Detalle_Movimiento detmov) {
         return new Detalle_MovimientoResponseDTO(
                 detmov.getId(),
-                productoMapper.entidadADTO(detmov.getProducto()), // productoMapper.entidadADTO(detmov.getProducto(),0),
+                productoMapper.entidadADTO(detmov.getProducto(),0), // productoMapper.entidadADTO(detmov.getProducto(),0),
                 detmov.getCantidad()
         );
     }

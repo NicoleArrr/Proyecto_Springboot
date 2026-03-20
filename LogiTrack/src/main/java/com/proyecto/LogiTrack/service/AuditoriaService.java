@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AuditoriaService {
     List<AuditoriaResponseDTO> listarHistorial();
-    List<AuditoriaResponseDTO> buscarPorUsuario(Long idUsuario);
+    List<AuditoriaResponseDTO> buscarPorUsuario(Long id_usuario);
     List<AuditoriaResponseDTO> buscarPorTipoOperacion(Tipo tipoOperacion);
     void registrar(String entidad, String valoresAnteriores, String valoresNuevos,
                    Tipo tipoOperacion, Long id_usuario);

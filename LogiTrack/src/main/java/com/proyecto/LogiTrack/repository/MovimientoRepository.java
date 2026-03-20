@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MovimientoRepository extends JpaRepository<Movimiento, Long> {
-    List<Movimiento> findByFechaBetween(LocalDateTime inicio, LocalDateTime fin);
+    List<Movimiento> findByFechaBetween(LocalDateTime fecha_inicio, LocalDateTime fecha_fin);
 }
