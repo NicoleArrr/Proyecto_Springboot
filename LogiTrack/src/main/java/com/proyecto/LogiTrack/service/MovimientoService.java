@@ -12,4 +12,6 @@ public interface MovimientoService {
     List<MovimientoResponseDTO> listarMovimientos();
     MovimientoResponseDTO buscarPorId(Long id);
     List<MovimientoResponseDTO> RangoDeFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin);
+
+    List<MovimientoResponseDTO> ultimosMovimientos();
 }

@@ -3,6 +3,7 @@ package com.proyecto.LogiTrack.service.Impl;
 import com.proyecto.LogiTrack.dto.request.MovimientoRequestDTO;
 import com.proyecto.LogiTrack.dto.response.Detalle_MovimientoResponseDTO;
 import com.proyecto.LogiTrack.dto.response.MovimientoResponseDTO;
+import com.proyecto.LogiTrack.dto.response.ProductoResponseDTO;
 import com.proyecto.LogiTrack.mapper.Detalle_MovimientoMapper;
 import com.proyecto.LogiTrack.mapper.MovimientoMapper;
 import com.proyecto.LogiTrack.model.*;
@@ -10,19 +11,20 @@ import com.proyecto.LogiTrack.repository.*;
 import com.proyecto.LogiTrack.service.AuditoriaService;
 import com.proyecto.LogiTrack.service.MovimientoService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class MovimientoServiceImpl implements MovimientoService {
 
-    private final MovimientoRepository movimientoRepository;
-    private final MovimientoMapper movimientoMapper;
-    private final Detalle_MovimientoMapper detalle_movimientoMapper;
-    private final Detalle_MovimientoRepository detalle_movimientoRepository;
-    private final BodegaProductoRepository bodegaProductoRepository;
-    private final BodegaRepository bodegaRepository;
-    private final ProductoRepository productoRepository;
-    private final UsuarioRepository usuarioRepository;
-    private final AuditoriaService auditoriaService;
+    private MovimientoRepository movimientoRepository;
+    private MovimientoMapper movimientoMapper;
+    private Detalle_MovimientoMapper detalle_movimientoMapper;
+    private Detalle_MovimientoRepository detalle_movimientoRepository;
+    private BodegaProductoRepository bodegaProductoRepository;
+    private BodegaRepository bodegaRepository;
+    private ProductoRepository productoRepository;
+    private UsuarioRepository usuarioRepository;
+    private AuditoriaService auditoriaService;
 
     @Override
     public MovimientoResponseDTO guardarMovimiento(MovimientoRequestDTO dto) {
@@ -70,4 +72,12 @@ public class MovimientoServiceImpl implements MovimientoService {
     public List<MovimientoResponseDTO> RangoDeFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         return List.of();
     }
+
+        @Override
+        public List<MovimientoResponseDTO> ultimosMovimientos() {
+            return movimientoRepository.findByFechaOrderByFechaDesc()
+                    .stream()
+                    .map(p -> movimientoMapper.entidadADTO(movimientoRepository, ultimosMovimientos(mov.getId())))
+                    .toList();
+        }
 }

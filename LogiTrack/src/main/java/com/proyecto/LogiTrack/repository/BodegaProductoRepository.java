@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface BodegaProductoRepository extends JpaRepository<BodegaProducto, Long> {
     @Query("SELECT bp.producto FROM BodegaProducto bp GROUP BY bp.producto HAVING SUM(bp.stock) < :stock")
-    List<Producto> findProductosConStockBajoQue(@Param("stock") Integer stock);
+    List<Producto> findProductosLessThanEqual(@Param("stock") Integer stock);
     Integer sumStockByProductoId(Long id_producto);
 }

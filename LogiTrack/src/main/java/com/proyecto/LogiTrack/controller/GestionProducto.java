@@ -19,7 +19,7 @@ import java.util.List;
 
 public class GestionProducto {
 
-    private final ProductoServiceImpl productoServiceImpl;
+    private ProductoServiceImpl productoServiceImpl;
 
     @PostMapping
     public ResponseEntity<ProductoResponseDTO> guardar(@Valid @RequestBody ProductoRequestDTO dto) {
@@ -40,7 +40,6 @@ public class GestionProducto {
     public ResponseEntity<ProductoResponseDTO> actualizar(@Valid @RequestBody ProductoRequestDTO dto, @PathVariable Long id) {
         return ResponseEntity.ok(productoServiceImpl.actualizarProducto(dto, id));
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {

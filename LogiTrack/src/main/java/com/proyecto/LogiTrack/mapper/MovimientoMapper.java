@@ -16,9 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovimientoMapper{
 
-    private final UsuarioMapper usuarioMapper;
-    private final BodegaMapper bodegaMapper;
-    private final ProductoMapper productoMapper;
+    private UsuarioMapper usuarioMapper;
+    private BodegaMapper bodegaMapper;
+    private ProductoMapper productoMapper;
 
     public Movimiento DTOAEntidad(MovimientoRequestDTO dto, Usuario encargado, Bodega origen, Bodega destino) {
         Movimiento mov = new Movimiento();

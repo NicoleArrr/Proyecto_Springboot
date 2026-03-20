@@ -16,9 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductoServiceImpl implements ProductoService {
 
-    private final ProductoRepository productoRepository;
-    private final ProductoMapper productoMapper;
-    private final BodegaProductoRepository bodegaProductoRepository;
+    private ProductoRepository productoRepository;
+    private ProductoMapper productoMapper;
+    private BodegaProductoRepository bodegaProductoRepository;
 
     private Integer calcularStock(Long id_producto) {
         Integer stock = bodegaProductoRepository.sumStockByProductoId(id_producto);
@@ -65,7 +65,7 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public List<ProductoResponseDTO> productosStockBajo() {
-        return bodegaProductoRepository.findProductosConStockBajoQue(10)
+        return bodegaProductoRepository.findProductosLessThanEqual(10)
                 .stream()
                 .map(p -> productoMapper.entidadADTO(p, calcularStock(p.getId())))
                 .toList();

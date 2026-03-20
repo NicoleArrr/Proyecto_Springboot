@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/Bodegas")
 @RequiredArgsConstructor
 public class GestionBodega {
-    private final BodegaServiceImpl bodegaServiceImpl;
+    private BodegaServiceImpl bodegaServiceImpl;
 
     @PostMapping
     public ResponseEntity<BodegaResponseDTO> guardar(@Valid @RequestBody BodegaRequestDTO dto) {
